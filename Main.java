@@ -95,8 +95,6 @@ class Main extends State {
     }
 
 
-
-
     // start the game using Main as the initial state
     // and TIC80 as the menu's font
     public static void main(String[] args){
@@ -128,9 +126,9 @@ class Main extends State {
                 break;
             case MAINMENU:
                 screen.setTextColor(15);
-                screen.setTextPosition(5, 5);
-                screen.textWidth(220);
-                screen.println("Welcome to my garden! As you can see, it has become quite decrepit. You see, I don't have a lot of time to tend to the garden anymore.");
+                screen.setTextPosition(0, 0);
+                screen.textRightLimit = 210;
+                screen.println("Welcome to my garden! As you can see, it has become quite decrepit.\nYou see, I don't have a lot of time to tend to the garden anymore.");
                 screen.println("If you're up to the task, I can pay you for your work!");
                 
                 break;
