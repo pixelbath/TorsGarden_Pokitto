@@ -22,9 +22,6 @@ class Main extends State {
     Dog dog; // an animated sprite imported from Aseprite
     Bg background; // static image
     Title titleImage;
-    float angle; // floats are actually FixedPoint (23.8)
-    
-    int counter; // variables are automatically initialized to 0 or null
 
     //TITLE UPDATE
     int c1, c2, titleCursor;

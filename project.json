@@ -194,6 +194,18 @@
 		},
 		"/TorsGarden.bin.1.gif": {
 			"sdcard": false
+		},
+		"/LICENSE": {
+			"sdcard": false
+		},
+		"/README.md": {
+			"sdcard": false
+		},
+		"/TorsGarden-Pokitto.elf": {
+			"sdcard": false
+		},
+		"/TorsGarden-Pokitto.bin": {
+			"sdcard": false
 		}
 	}
 }
