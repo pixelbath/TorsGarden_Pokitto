@@ -86,6 +86,9 @@ class Main extends State {
                 }
                 break;
             case 1:
+                if(Button.A.justPressed()){
+                    //gardenState = GardenState.MAINMENU;
+                }
                 break;
         }
         dog.draw(screen);
