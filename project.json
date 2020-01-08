@@ -206,6 +206,12 @@
 		},
 		"/TorsGarden-Pokitto.bin": {
 			"sdcard": false
+		},
+		"/Menu.png": {
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0,
+			"sdcard": false
 		}
 	}
 }

@@ -81,7 +81,9 @@ class Main extends State {
         
         switch(titleCursor){
             case 0:
-                
+                if(Button.A.justPressed()){
+                    gardenState = GardenState.MAINMENU;
+                }
                 break;
             case 1:
                 break;
@@ -120,6 +122,14 @@ class Main extends State {
         switch(gardenState){
             case TITLE:
                 titleUpdate();
+                break;
+            case MAINMENU:
+                screen.setTextColor(15);
+                screen.setTextPosition(5, 5);
+                screen.textWidth(220);
+                screen.println("Welcome to my garden! As you can see, it has become quite decrepit. You see, I don't have a lot of time to tend to the garden anymore.");
+                screen.println("If you're up to the task, I can pay you for your work!");
+                
                 break;
         }
         
