@@ -1,0 +1,18 @@
+Tor's Garden - Game Brainstorm
+
+Loc  - There is a garden. The player plants various different plants in
+ the garden.
+
+why? - The garden starts pretty decrepit and beat up. The player takes the
+ role as gardener to revive the garden to a better state. 
+
+how? - Tending to the garden through Planting, Watering, Nurturing and by
+protecting the plants from disease and insects (swater mini-game)
+
+Obstacles - Insects will attempt to eat the plants. Tiers unlock when
+a plant of the given tier reaches the "perfect" level. 
+
+Win - To win, the player will revive the full garden, all tiers will be
+completed and have at least 1 "perfect" plant. 
+
+Extra - Achievments, mini-game score (insect battle). 
