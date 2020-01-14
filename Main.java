@@ -98,11 +98,65 @@ class Main extends State {
     //END TITLE UPDATE
 
     //START RUNNING UPDATE
+    int cx, cy, insects, time;
     void runningInit(){
-        
+        cx = 10;
+        cy = 10;
+        insects = 0;
+        time = 0;
+        bug = new Bug();
+        wings = new Wing();
+        wings.flap();
     }
     void runningUpdate(){
+        time++;
+        if(time >= 100) time = 0;
         
+        if(insects == 0 && time > 98){
+            insects = Math.random(1, 9);
+            //IF INSECT NOT ON PLANT, RESET INSECTS
+            System.out.println("Set insects: " + insects);
+        }
+        int tile = 1;
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                int x = 40*i+40;
+                int y = 40*j+40;
+                screen.setTextPosition(x, y);
+                screen.print(": "+tile);
+                if(cx+8 > x && cx+8 < x + 32 && cy+8 > y && cy+8 < y+32){
+                    screen.drawRect(x, y, 32, 32, 7);
+                    if(insects == tile && Button.B.justPressed()){
+                        minigameInit(5);
+                        gardenState = GardenState.MINIGAME;
+                        return;
+                    }
+                }else{
+                    screen.drawRect(x, y, 32, 32, 2);
+                }
+                if(insects == tile){
+                    bug.draw(screen, x, y);
+                    wings.draw(screen, x+4, y-8);
+                }
+                tile++;
+            }
+        }
+        
+        if(Button.Left.isPressed()){
+            cx--;
+            dog.setMirrored(true);
+        }
+        if(Button.Right.isPressed()){
+            cx++;
+            dog.setMirrored(false);
+        }
+        if(Button.Down.isPressed()){
+            cy++;
+        }
+        if(Button.Up.isPressed()){
+            cy--;
+        }
+        dog.draw(screen, cx, cy);
     }
     //END RUNNING UPDATE
     
@@ -136,6 +190,7 @@ class Main extends State {
             screen.setTextColor(7);
             screen.println("The plant is safe!");
             if(Button.B.justPressed()){
+                insects = 0;
                 gardenState = GardenState.RUNNING;
             }
             return;   
@@ -229,8 +284,9 @@ class Main extends State {
                 screen.println("Welcome to my garden! As you can see, it has become quite decrepit.\nYou see, I don't have a lot of time to tend to the garden anymore.");
                 screen.println("If you're up to the task, I can pay you for your work!");
                 if(Button.A.justPressed()){
-                    minigameInit(Math.random(5, 15));
-                    gardenState = GardenState.MINIGAME;
+                    //init running state
+                    runningInit();
+                    gardenState = GardenState.RUNNING;
                 }
                 break;
             case RUNNING:
@@ -238,6 +294,8 @@ class Main extends State {
                 screen.setTextPosition(0, 0);
                 screen.textRightLimit = 210;
                 screen.println("Running screen");
+                runningUpdate();
+                //tmp
                 if(Button.B.justPressed()){
                     minigameInit(Math.random(5, 15));
                     gardenState = GardenState.MINIGAME;

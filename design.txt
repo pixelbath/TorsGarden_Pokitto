@@ -1,18 +1,29 @@
 Tor's Garden - Game Brainstorm
 
-Loc  - There is a garden. The player plants various different plants in
- the garden.
+3x3 garden grid. User will start with a plant. 
 
-why? - The garden starts pretty decrepit and beat up. The player takes the
- role as gardener to revive the garden to a better state. 
+plants can have types (flower, veggie, fruit, etc...)
 
-how? - Tending to the garden through Planting, Watering, Nurturing and by
-protecting the plants from disease and insects (swater mini-game)
+Plant types can determine difficulty and "work" to grow to full maturity.
 
-Obstacles - Insects will attempt to eat the plants. Tiers unlock when
-a plant of the given tier reaches the "perfect" level. 
+Mini Games:
 
-Win - To win, the player will revive the full garden, all tiers will be
-completed and have at least 1 "perfect" plant. 
+The main way to improve plants is through minigames.
 
-Extra - Achievments, mini-game score (insect battle), Zen garden. 
+Minigames can be triggered in different ways. 
+
+Some are randomly spawned (weeds, insects)
+
+Some are manually triggered with tools (Digging for planting, Pruning, harvest)
+
+ideas:
+- Dig the right size plot for the plant (The more accurate the plot, the better fitting the plant, 
+the higher quality overall.
+- Swatting Insetcs.
+- Weeding.
+- Pruning.
+- Harvesting.
+
+- Zen Garden?
+
+
