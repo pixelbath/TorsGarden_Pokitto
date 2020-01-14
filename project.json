@@ -212,6 +212,69 @@
 			"palette": "[default]",
 			"palOffset": 0,
 			"sdcard": false
+		},
+		"/design.txt": {
+			"sdcard": false
+		},
+		"/MiniGameBG.png": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/Bug.png": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/Wings.png": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/Wings.json": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/Wing.png": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/Wing.ase": {
+			"sdcard": false
+		},
+		"/Wing.json": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/SwatterUp.png": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/SwatterDown.png": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/Leaf.png": {
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0,
+			"sdcard": false
+		},
+		"/TorsGarden-Pokitto.bin.1.gif": {
+			"sdcard": false
 		}
 	}
 }

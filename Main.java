@@ -9,12 +9,14 @@ public enum GardenState{
     TITLE,
     MAINMENU,
     RUNNING,
-    PAUSEMENU
+    MINIGAME,
+    PAUSEMENU,
+    GAMEOVER
 }
 
 class Main extends State {
-
     
+    //Default start at TITLE screen state
     GardenState gardenState = GardenState.TITLE;
     
     HiRes16Color screen; // the screenmode we want to draw with
@@ -87,13 +89,109 @@ class Main extends State {
                 break;
             case 1:
                 if(Button.A.justPressed()){
-                    //gardenState = GardenState.MAINMENU;
+                    //Clear the save data here
                 }
                 break;
         }
         dog.draw(screen);
     }
+    //END TITLE UPDATE
 
+    //START RUNNING UPDATE
+    void runningInit(){
+        
+    }
+    void runningUpdate(){
+        
+    }
+    //END RUNNING UPDATE
+    
+    //START MINIGAME UPDATE 
+    Leaf leaf;
+    Bug bug;
+    int bgx, bgy;
+    Wing wings;
+    SwatterUp swatUp;
+    
+    int swatReload, swx, swy, numBugs;
+    void minigameInit(int num){
+        numBugs = num;
+        leaf = new Leaf();
+        bug = new Bug();
+        bgx = 40;
+        bgy = 40;
+        wings = new Wing();
+        wings.flap();
+        
+        swatUp = new SwatterUp();
+        swx = 50;
+        swy = 50;
+        swatReload = 25;
+    }
+    
+    void minigameUpdate(){
+        if(numBugs == 0){
+            screen.drawRect(30, 30, 130, 45, 7);
+            screen.setTextPosition(32, 32);
+            screen.setTextColor(7);
+            screen.println("The plant is safe!");
+            if(Button.B.justPressed()){
+                gardenState = GardenState.RUNNING;
+            }
+            return;   
+        }
+        //draw stem
+        screen.fillRect(100, 0, 20, 180, 7);
+        screen.drawRect(99, 0, 21, 180, 15);
+        leaf.draw(screen, 70, 50);
+        leaf.draw(screen, 118, 80, true, false, false);
+        
+        if(bgx > 110) bgx--;
+        if(bgx < 110) bgx++;
+        if(bgy > 80) bgy --;
+        if(bgy < 80) bgy++;
+        
+        if(bgx > 110)
+            bug.draw(screen, bgx, bgy, true, false, false);
+        else
+            bug.draw(screen, bgx, bgy, false, false, false);
+            
+        wings.draw(screen, bgx+4, bgy-8);
+        
+        if(swatReload > 0){
+            swatReload--;
+            swatUp.draw(screen, swx, swy, false, true, false);
+        }else{
+            swatUp.draw(screen, swx, swy, false, false, false);
+        }
+        
+        if(Button.Left.isPressed()){
+            swx--;
+        }
+        if(Button.Right.isPressed()){
+            swx++;
+        }
+        if(Button.Up.isPressed()){
+            swy--;
+        }
+        if(Button.Down.isPressed()){
+            swy++;
+        }
+        
+        if(swatReload == 0 && Button.B.justPressed()){
+            swatReload = 25;
+            if(swx+8 > bgx && swx+8 < bgx+bug.width() && swy+4 > bgy && swy+4 < bgy + bug.height()){
+                bgx = Math.random(-2, 2) > 0 ? 240 : -80;
+                bgy = Math.random(-40, 200);
+                numBugs--;
+            }
+        }
+        
+        
+    }
+    
+    
+    //END MINIGAME UPDATE 
 
     // start the game using Main as the initial state
     // and TIC80 as the menu's font
@@ -130,8 +228,30 @@ class Main extends State {
                 screen.textRightLimit = 210;
                 screen.println("Welcome to my garden! As you can see, it has become quite decrepit.\nYou see, I don't have a lot of time to tend to the garden anymore.");
                 screen.println("If you're up to the task, I can pay you for your work!");
-                
+                if(Button.A.justPressed()){
+                    minigameInit(Math.random(5, 15));
+                    gardenState = GardenState.MINIGAME;
+                }
                 break;
+            case RUNNING:
+                screen.setTextColor(15);
+                screen.setTextPosition(0, 0);
+                screen.textRightLimit = 210;
+                screen.println("Running screen");
+                if(Button.B.justPressed()){
+                    minigameInit(Math.random(5, 15));
+                    gardenState = GardenState.MINIGAME;
+                    
+                }
+                break;
+            case MINIGAME:
+                minigameUpdate();
+                break;
+            case PAUSEMENU:
+                break;
+            case GAMEOVER:
+                break;
+            
         }
         
         // Update the screen with everything that was drawn
