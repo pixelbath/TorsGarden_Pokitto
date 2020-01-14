@@ -15,4 +15,4 @@ a plant of the given tier reaches the "perfect" level.
 Win - To win, the player will revive the full garden, all tiers will be
 completed and have at least 1 "perfect" plant. 
 
-Extra - Achievments, mini-game score (insect battle). 
+Extra - Achievments, mini-game score (insect battle), Zen garden. 
