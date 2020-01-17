@@ -9,7 +9,9 @@ public enum GardenState{
     TITLE,
     MAINMENU,
     RUNNING,
-    MINIGAME,
+    DAYSUMMARY,
+    BUGSWAT,
+    SHOP,
     PAUSEMENU,
     GAMEOVER
 }
@@ -63,7 +65,6 @@ class Main extends State {
             }
         }
         
-        
         titleImage.draw(screen, 45, 10);
         
         screen.setTextColor(5);
@@ -98,48 +99,28 @@ class Main extends State {
     //END TITLE UPDATE
 
     //START RUNNING UPDATE
-    int cx, cy, insects, time;
+    int cx, cy, insects, time, day;
     void runningInit(){
         cx = 10;
         cy = 10;
         insects = 0;
         time = 0;
+        day = 220;
         bug = new Bug();
         wings = new Wing();
         wings.flap();
     }
     void runningUpdate(){
         time++;
-        if(time >= 100) time = 0;
+        if(time >= 100) {
+            time = 0;
+            day--;
+        }
         
         if(insects == 0 && time > 98){
             insects = Math.random(1, 9);
             //IF INSECT NOT ON PLANT, RESET INSECTS
             System.out.println("Set insects: " + insects);
-        }
-        int tile = 1;
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                int x = 40*i+40;
-                int y = 40*j+40;
-                screen.setTextPosition(x, y);
-                screen.print(": "+tile);
-                if(cx+8 > x && cx+8 < x + 32 && cy+8 > y && cy+8 < y+32){
-                    screen.drawRect(x, y, 32, 32, 7);
-                    if(insects == tile && Button.B.justPressed()){
-                        minigameInit(5);
-                        gardenState = GardenState.MINIGAME;
-                        return;
-                    }
-                }else{
-                    screen.drawRect(x, y, 32, 32, 2);
-                }
-                if(insects == tile){
-                    bug.draw(screen, x, y);
-                    wings.draw(screen, x+4, y-8);
-                }
-                tile++;
-            }
         }
         
         if(Button.Left.isPressed()){
@@ -156,11 +137,41 @@ class Main extends State {
         if(Button.Up.isPressed()){
             cy--;
         }
+        
+        //draw day meter
+        screen.drawRect(0, 0, day, 3, 7);
+        
+        //draw plots and bugs
+        int tile = 1;
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                int x = 40*i+40;
+                int y = 40*j+40;
+                screen.setTextPosition(x, y);
+                screen.print(": "+tile);
+                if(cx+8 > x && cx+8 < x + 32 && cy+8 > y && cy+8 < y+32){
+                    screen.drawRect(x, y, 32, 32, 7);
+                    if(insects == tile && Button.A.justPressed()){
+                        bugswatInit(5);
+                        gardenState = GardenState.BUGSWAT;
+                        return;
+                    }
+                }else{
+                    screen.drawRect(x, y, 32, 32, 2);
+                }
+                if(insects == tile){
+                    bug.draw(screen, x, y);
+                    wings.draw(screen, x+4, y-8);
+                }
+                tile++;
+            }
+        }
+        
         dog.draw(screen, cx, cy);
     }
     //END RUNNING UPDATE
     
-    //START MINIGAME UPDATE 
+    //START BUGSWAT MINIGAME UPDATE 
     Leaf leaf;
     Bug bug;
     int bgx, bgy;
@@ -168,7 +179,7 @@ class Main extends State {
     SwatterUp swatUp;
     
     int swatReload, swx, swy, numBugs;
-    void minigameInit(int num){
+    void bugswatInit(int num){
         numBugs = num;
         leaf = new Leaf();
         bug = new Bug();
@@ -183,7 +194,7 @@ class Main extends State {
         swatReload = 25;
     }
     
-    void minigameUpdate(){
+    void bugswatUpdate(){
         if(numBugs == 0){
             screen.drawRect(30, 30, 130, 45, 7);
             screen.setTextPosition(32, 32);
@@ -244,9 +255,7 @@ class Main extends State {
         
         
     }
-    
-    
-    //END MINIGAME UPDATE 
+    //END BUGSWAT MINIGAME UPDATE 
 
     // start the game using Main as the initial state
     // and TIC80 as the menu's font
@@ -290,20 +299,16 @@ class Main extends State {
                 }
                 break;
             case RUNNING:
-                screen.setTextColor(15);
-                screen.setTextPosition(0, 0);
-                screen.textRightLimit = 210;
-                screen.println("Running screen");
                 runningUpdate();
                 //tmp
-                if(Button.B.justPressed()){
-                    minigameInit(Math.random(5, 15));
-                    gardenState = GardenState.MINIGAME;
+                // if(Button.B.justPressed()){
+                //     bugswatInit(Math.random(5, 15));
+                //     gardenState = GardenState.BUGSWAT;
                     
-                }
+                // }
                 break;
-            case MINIGAME:
-                minigameUpdate();
+            case BUGSWAT:
+                bugswatUpdate();
                 break;
             case PAUSEMENU:
                 break;
