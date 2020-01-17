@@ -24,7 +24,7 @@ class Main extends State {
     HiRes16Color screen; // the screenmode we want to draw with
 
     Dog dog; // an animated sprite imported from Aseprite
-    Bg background; // static image
+    // Bg background; // static image
     Title titleImage;
 
     //TITLE UPDATE
@@ -290,7 +290,7 @@ class Main extends State {
     // Allocate on init instead.
     void init(){
         screen = new HiRes16Color(Castpixel16.palette(), TIC80.font());
-        background = new Bg();
+        // background = new Bg();
         dog = new Dog();
         dog.run(); // "run" is one of the animations in the spritesheet
         
