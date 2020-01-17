@@ -100,15 +100,22 @@ class Main extends State {
 
     //START RUNNING UPDATE
     int cx, cy, insects, time, day;
+    Edge edge;
+    SideEdge side;
+    Corner corner;
     void runningInit(){
         cx = 10;
         cy = 10;
         insects = 0;
         time = 0;
-        day = 220;
+        day = 187;
         bug = new Bug();
         wings = new Wing();
         wings.flap();
+        
+        edge = new Edge();
+        side = new SideEdge();
+        corner = new Corner();
     }
     void runningUpdate(){
         time++;
@@ -138,14 +145,30 @@ class Main extends State {
             cy--;
         }
         
-        //draw day meter
-        screen.drawRect(0, 0, day, 3, 7);
         
+        //draw walls
+        for(int i = 1; i < 13; i++){
+            edge.draw(screen, i*16, 0);
+            edge.draw(screen, i*16, 160, false, true, false);
+        }
+        for(int i = 1; i < 10; i++){
+            side.draw(screen, 0, i*16);
+            side.draw(screen, 204, i*16, true, false, false);
+        }
+        corner.draw(screen, 0, 0);
+        corner.draw(screen, 0, 160, false, true, false);
+        corner.draw(screen, 204, 0, true, false, false);
+        corner.draw(screen, 204, 160, true, true, false);
+        
+        
+        //draw day meter
+        screen.drawRect(16, 14, 188, 4, 7);
+        screen.fillRect(17, 15, day, 2, 8);
         //draw plots and bugs
         int tile = 1;
         for(int i = 0; i < 3; i++){
             for(int j = 0; j < 3; j++){
-                int x = 40*i+40;
+                int x = 40*i+56;
                 int y = 40*j+40;
                 screen.setTextPosition(x, y);
                 screen.print(": "+tile);

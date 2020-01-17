@@ -275,6 +275,24 @@
 		},
 		"/TorsGarden-Pokitto.bin.1.gif": {
 			"sdcard": false
+		},
+		"/Corner.png": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/Edge.png": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
+		},
+		"/SideEdge.png": {
+			"sdcard": false,
+			"implements": "",
+			"palette": "[default]",
+			"palOffset": 0
 		}
 	}
 }
