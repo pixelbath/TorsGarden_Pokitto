@@ -73,7 +73,7 @@
 			"-fno-delete-null-pointer-checks"
 		],
 		"ALL": [
-			"-std=c++14"
+			"-std=c++17"
 		]
 	},
 	"GDBFlags": {
@@ -293,6 +293,12 @@
 			"implements": "",
 			"palette": "[default]",
 			"palOffset": 0
+		},
+		"/test.wav": {
+			"sdcard": false
 		}
+	},
+	"BUILDFlags": {
+		"Pokitto": {}
 	}
 }
